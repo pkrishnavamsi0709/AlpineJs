@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>My Web Page</title>                      
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>          <!-- this line includes Alpine.js for interactivity -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,6 +112,145 @@
         Dropdown Contents...
     </div>
 </div>
+
+
+<div> This is for the practice </div>
+
+<div x-data="{isOpen : false , toggle(){ this.isOpen = ! this.isOpen}, message: 'this is the content to show' }">
+<p x-text="message" x-show="isOpen" x-transition></p>
+<button @click="toggle()">Toggle</button>
+</div>
+
+<div x-data="{isOpen : false , toggle(){ this.isOpen = ! this.isOpen}, message: 'this is the content to show' }">
+<template  x-if="isOpen" ></template>
+<button @click="toggle()">Toggle 2</button>
+</div>
+
+
+<div x-data="{init(){console.log('This is first')}}",  x-init="console.log('second')"> </div>
+
+
+
+<div x-data="{isOpen : false , toggle(){ this.isOpen = ! this.isOpen}, message: 'this is the content to show with x-bind ' }">
+<p  :class="isOpen ? '': 'hidden' ">Hi</p>
+<button @click="toggle()">Toggle</button>
+</div>
+
+
+<div x-data="{isOpen : false , toggle(){ this.isOpen = ! this.isOpen}, message: 'this is the content to show with x-bind ' }">
+<p  :class="isOpen || 'hidden' " class="myclass">Hi 2 here we can use 2 classe one with bind and other normal </p>
+<button @click="toggle()">Toggle</button>
+</div>
+
+
+<h2> Assignment Questions</h2>
+
+<hr>
+
+<div>
+Counter :
+<p x-text="$store.Counter.count"></p>
+<button @click="$store.Counter.incrimentCounter()">Increment</button>
+<button @click="$store.Counter.decrementCounter()">Decrement</button>
+</div>
+
+<hr>
+
+
+
+
+<div  @notify="alert('hello')">
+<button @click="$dispatch('notify')">click me</button>
+</div>
+
+<div  @notify="alert($event.detail.message)">
+<button @click="$dispatch('notify',{message : 'HELLO VAMSI' } )">click me VAMSI</button>
+</div>
+
+<hr>
+
+<button @click="$dispatch('notifyme','Hi Vamsi thx for using notification' )">notifyme</button>
+
+<hr>
+
+<div x-data="{ name : 'krishna' }">
+ <p x-effect="console.log(name)" x-text="name"></p>
+ <button @click="name = name + 'vamsi' ">add Vamsi to name</button>
+ </div>
+
+ <hr>
+
+
+ <div x-data="{name:''}">
+ <input x-model="name" type = "text" placeholder="Enter your Name">
+ <p :class = "name == 'vamsi' ? '' : 'hidden' "> Hi Vamsi</p>
+ </div>
+
+
+ <div x-data="{show:true}"></div>
+ <input type="checkbox" id="checkbox" x-model="show">
+<label for="checkbox" x-text="show"></label>
+
+
+<hr>
+
+<div x-data>
+<input x-model="$store.userData.name" placeholder="Enter Your Name" @input="$store.userData.setName($store.userData.name)">
+<p x-text="$store.userData.name"></p>
+<div>
+
+
+
+<hr>
+<hr>
+
+<div x-data="{open:true , content : 'HI THIS IS THE CONTENT OF AEM'}">
+<p x-show="open" x-text="content" x-transition></p>
+<button @click="open = !open ">Toggle</button>
+</div>
+
+<hr> 
+
+<div x-data> 
+<p>Here Your Content Will be Shown <p x-text="$store.aemData.content"></p> In Between This </p>
+</div>
+
+
+<div>
+<input placeholder="Enter your Content" x-model="$store.aemData.content">
+</div>
+
+<hr>
+
+<div x-data="{animals : [{animalName: 'cat' , content : 'This is the Cat Content'},{animalName : 'Dog' , content : 'This is the Dog Content'},{animalName : 'Lion' , content : 'This is the Lion Content'}], contentToShow:'This is the cat Content'}">
+<template x-for="animal in animals">
+<div>
+<button  class="m-1 p-2 border" @click="contentToShow = animal.content" x-text="animal.animalName"></button>
+</div>
+</template>
+<p x-text="contentToShow"></p>
+</div>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
 </body>
